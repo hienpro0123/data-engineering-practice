@@ -1,6 +1,6 @@
-FROM python:latest
-
-WORKDIR app
+FROM python:3.10
+WORKDIR /app
 COPY . /app
 
-RUN python3 -m pip install -r requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
