@@ -6,7 +6,7 @@ Sau khi `docker build --tag=exercise-1 .`, thêm code vào `main.py` và chạy 
 Tải các file zip (trừ 1 link lỗi: `https://divvy tripdata.s3.amazonaws.com/Divvy_Trips_2220_Q1.zip`).
 File zip được lưu trong thư mục `downloads_url`.
 
-![Exercise 1](exercise1.png)
+![Exercise 1](https://imgur.com/a/InZtg6M)
 
 ## Exercise 2
 
