@@ -17,7 +17,10 @@ Cào dữ liệu từ website và lưu vào file CSV.
 
 ## Exercise 3
 Sau khi thực hiện lệnh docker build --tag=exercise3 . để tạo Docker image cho dự án, ta có thể thêm đoạn mã cần thiết vào file main.py để xử lý việc tải và giải nén dữ liệu từ Common Crawl. Tiếp đó, khi chạy lệnh docker-compose up trong thư mục EXERCISE-3, chương trình sẽ được thực thi trong môi trường container, tự động tải tập tin wet.paths.gz từ S3 bucket của Common Crawl. Quá trình này tạo ra ba thư mục để lưu trữ dữ liệu: thư mục gzip_files chứa file .gz vừa tải về; thư mục path_files lưu trữ file .txt được giải nén từ .gz, trong đó có danh sách các đường dẫn WET file; và thư mục data_files là nơi chứa file .wet sau khi được giải nén hoàn chỉnh – đây là nội dung văn bản thô được thu thập từ các trang web.
+
 ![Exercise 3](exercise2.png)
+
+
 
 ## Exercise 4
 
