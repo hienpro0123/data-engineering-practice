@@ -1,5 +1,8 @@
 # Báo cáo các bài tập
 
+##Pipeline chạy lần lượt các Exercise-1, Exercise-2, Exercise-3, Exercise-4, Exercise-5
+![Pipeline](70bc2100-fc35-4a8d-a572-9585b5fd8f55.png)
+
 ## Exercise 1
 
 Sau khi `docker build --tag=exercise-1 .`, thêm code vào `main.py` và chạy `docker-compose up`.
