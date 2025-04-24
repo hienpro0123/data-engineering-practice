@@ -12,7 +12,7 @@ import os
 def main():
     # S3 Bucket variables
     bucket_name = 'commoncrawl'
-    key = 'crawl-data/CC-MAIN-2020-16/wet.paths.gz'
+    key = 'crawl-data/CC-MAIN-2022-05/wet.paths.gz'
     s3 = boto3.resource('s3')
 
     # Creating directories
