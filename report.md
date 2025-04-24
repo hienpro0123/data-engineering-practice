@@ -8,8 +8,9 @@ File zip được lưu trong thư mục `downloads_url`.
 
 ![Exercise 1](https://i.imgur.com/cG7wOWb.jpeg)
 
+![Exercise 1](https://i.imgur.com/xBjWCX8.png)
 
-
+## Exercise 2
 Sau khi `docker build --tag=exercise-2 .`, thêm code vào `main.py` và chạy `docker-compose up`.
 Cào dữ liệu từ website và lưu vào file CSV.
 
