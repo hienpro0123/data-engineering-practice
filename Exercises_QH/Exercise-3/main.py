@@ -1,35 +1,49 @@
 import boto3
 import gzip
-import io
+import shutil
+import wget
+import os
 
-def download_s3_file(bucket, key):
-    s3 = boto3.client('s3')
-    response = s3.get_object(Bucket=bucket, Key=key)
-    return response['Body'].read()
-
-def stream_s3_file(bucket, key):
-    s3 = boto3.client('s3')
-    response = s3.get_object(Bucket=bucket, Key=key)
-    return response['Body'].iter_lines()
+# Bucket: commoncrawl
+# Key: crawl-data/CC-MAIN-2022-05/wet.paths.gz
+# Concatenate the following URL with the file URL: https://data.commoncrawl.org/
 
 def main():
-    bucket = 'commoncrawl'
+    # S3 Bucket variables
+    bucket_name = 'commoncrawl'
     key = 'crawl-data/CC-MAIN-2022-05/wet.paths.gz'
+    s3 = boto3.resource('s3')
 
-    # 1. Tải file .gz vào bộ nhớ
-    gz_data = download_s3_file(bucket, key)
+    # Creating directories
+    if not os.path.exists('gzip_files'):
+        os.makedirs('gzip_files')
+        print('Directory "gzip_files" created')
 
-    # 2. Giải nén trong bộ nhớ và đọc dòng đầu tiên
-    with gzip.GzipFile(fileobj=io.BytesIO(gz_data)) as gz:
-        first_path = gz.readline().decode('utf-8').strip()
+    if not os.path.exists('path_files'):
+        os.makedirs('path_files')
+        print('Directory "path_files" created')
 
-    print(f"First path: {first_path}")
+    if not os.path.exists('data_files'):
+        os.makedirs('data_files')
+        print('Directory "data_files" created')
 
-    # 3. Tải và in từng dòng từ file trong path đầu tiên
-    lines = stream_s3_file(bucket, first_path)
-    for line in lines:
-        print(line.decode('utf-8'))
+    s3.Bucket(bucket_name).download_file(key, 'gzip_files/wet.paths.gz')
 
-if __name__ == "__main__":
-    print("🚀 Starting the script...")
+    with gzip.open('gzip_files/wet.paths.gz', 'rb') as gzip_obj:
+        with open('path_files/wet.paths.txt', 'wb') as content:
+            shutil.copyfileobj(gzip_obj, content)
+
+    with open('path_files/wet.paths.txt', 'r') as data_file:
+        url = f'https://data.commoncrawl.org/{list(data_file)[0]}'
+        file_name = url[url.rfind('/') + 1:]
+        wget.download(url, 'gzip_files/')
+
+    with gzip.open('gzip_files/' + file_name.replace('\n', ''), 'rb') as f_gzip_file:
+        with open('data_files/' + file_name.replace('.gz', '').replace('\n', ''), 'wb') as unzip_file:
+            shutil.copyfileobj(f_gzip_file, unzip_file)
+
+    pass
+
+
+if __name__ == '__main__':
     main()
