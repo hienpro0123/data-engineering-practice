@@ -1,0 +1,20 @@
+version: "3.8"  # Phiên bản hợp lệ nhất hiện nay
+
+services:
+  test:
+    build: .  # Thêm dòng này để tự build image
+    image: exercise-1
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: python -m pytest
+
+  run:
+    build: .
+    image: exercise-1
+    volumes:
+      - .:/app
+    working_dir: /app
+    stdin_open: true  # Cho phép tương tác
+    tty: true         # Giữ container chạy
+    command: python main.py
