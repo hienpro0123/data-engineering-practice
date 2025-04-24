@@ -1,6 +1,6 @@
-FROM python:3.10
+FROM python:latest
+
 WORKDIR /app
 COPY . /app
 
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN python3 -m pip install -r requirements.txt
